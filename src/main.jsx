@@ -136,7 +136,7 @@ function MobileDock({ t, lang, onOpenChange, disabled }) {
   ];
   const renderItem = item => item.group ? <button className={`mobile-dock-item ${panel === item.id ? 'is-selected' : ''}`} key={item.id} aria-expanded={panel === item.id} aria-controls={`oa-dock-${item.id}`} onClick={() => setPanel(previous => previous === item.id ? null : item.id)}>
     {panel === item.id && <motion.span className="mobile-dock-selection" layoutId="oa-dock-selection" aria-hidden="true" transition={{ duration: reduce ? 0 : .2, ease }} />}
-    <Icon name={item.icon} /><Icon name="right" className="dock-chevron" /><span>{item.label}</span>
+    <Icon name={item.icon} /><span>{item.label}</span><Icon name="right" className="dock-chevron" />
   </button> : <a className="mobile-dock-item" href={item.href} key={item.id} onClick={close}><Icon name={item.icon} /><span>{item.label}</span></a>;
 
   return <div ref={ref} className="mobile-dock-shell" role={panel ? 'dialog' : undefined} aria-modal={panel ? true : undefined} aria-label={t.dockNavigation} inert={disabled ? true : undefined}>
@@ -149,8 +149,7 @@ function MobileDock({ t, lang, onOpenChange, disabled }) {
       </motion.section>}
     </AnimatePresence>
     <nav className="mobile-dock" aria-label={t.dockNavigation}>
-      <div className="mobile-dock-primary">{items.slice(0, 4).map(renderItem)}</div>
-      <div className="mobile-dock-secondary">{items.slice(4).map(renderItem)}</div>
+      <div className="mobile-dock-track">{items.map(renderItem)}</div>
     </nav>
   </div>;
 }
