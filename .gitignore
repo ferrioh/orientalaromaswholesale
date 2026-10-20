@@ -1,0 +1,7 @@
+node_modules/
+.npm-cache/
+dist/
+.vercel/
+_versions/
+*.log
+*.zip

@@ -1,0 +1,77 @@
+{{ 'oriental-aromas.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign featured = section.settings.featured_collection
+  if featured == blank
+    assign featured = collections['new-arrivals']
+  endif
+  if featured == blank
+    assign featured = collections.all
+  endif
+  assign intro_url = 'oa-truck-scroll.mp4' | asset_url
+  assign discovery_url = 'oa-discovery-pingpong.mp4' | asset_url
+  if section.settings.intro_video != blank
+    for source in section.settings.intro_video.sources
+      if source.format == 'mp4'
+        assign intro_url = source.url
+        break
+      endif
+    endfor
+  endif
+  if section.settings.discovery_video != blank
+    for source in section.settings.discovery_video.sources
+      if source.format == 'mp4'
+        assign discovery_url = source.url
+        break
+      endif
+    endfor
+  endif
+%}
+<div id="oriental-aromas-root" data-config-id="oa-config-{{ section.id }}"></div>
+<script type="application/json" id="oa-config-{{ section.id }}">
+{
+  "shopify": true,
+  "locale": {{ request.locale.iso_code | json }},
+  "cartCount": {{ cart.item_count | json }},
+  "assets": {
+    __ASSET_MAP__
+  },
+  "products": [
+    {% for product in featured.products limit: 4 %}
+      {
+        "title": {{ product.title | json }},
+        "url": {{ product.url | json }},
+        "image": {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | json }}{% else %}{{ 'oa-product-0.webp' | asset_url | json }}{% endif %},
+        "price": {{ product.price | money_with_currency | strip_html | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+<div id="oa-native-newsletter" hidden>
+  {% form 'customer', id: 'oa-newsletter-native' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <label for="oa-newsletter-email" class="sr-only">Tu correo electrónico</label>
+    <input id="oa-newsletter-email" type="email" name="contact[email]" value="{{ form.email | escape }}" required autocomplete="email" placeholder="Tu correo electrónico">
+    <button type="submit" class="icon-button" aria-label="Suscribirme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button>
+    {% if form.posted_successfully? %}<p class="newsletter-status" role="status">{% if request.locale.iso_code == 'es' %}Gracias por suscribirte.{% else %}Thank you for subscribing.{% endif %}</p>{% endif %}
+    {% if form.errors %}<div class="newsletter-status" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+  {% endform %}
+</div>
+<script type="module" src="{{ 'oriental-aromas.js' | asset_url }}"></script>
+<noscript><div style="padding:5rem 2rem;background:#f1e7d8;color:#443024"><h1>Oriental Aromas Wholesale</h1><p>Perfumería de Dubái. Mayoreo desde USD 499.</p><p><a href="/collections/all">Ver catálogo / Explore catalog</a></p><p>6371 NW 102nd Ave, Ste 102, Doral, FL 33178 · +1 (786) 731-9919</p></div></noscript>
+{% schema %}
+{
+  "name": "Oriental Aromas",
+  "tag": "section",
+  "class": "oriental-aromas-landing",
+  "limit": 1,
+  "settings": [
+    { "type": "paragraph", "content": "Vídeo principal: loop de 40 s que empieza y termina en el logo. El camión avanza con el scroll. Ambos desaparecen antes de «Un gran comienzo»." },
+    { "type": "collection", "id": "featured_collection", "label": "Colección de la selección" },
+    { "type": "video", "id": "discovery_video", "label": "Vídeo principal: loop del logo", "info": "Opcional. Si se deja vacío se usa el vídeo incluido (40 s, inicia y termina en el logo)." },
+    { "type": "video", "id": "intro_video", "label": "Vídeo del camión (scroll)", "info": "Opcional. Si se deja vacío se usa el vídeo incluido del camión." }
+  ],
+  "presets": [{ "name": "Oriental Aromas" }],
+  "enabled_on": { "templates": ["index", "page"] }
+}
+{% endschema %}

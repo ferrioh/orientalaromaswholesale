@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#493222">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="icon" href="{{ 'oa-favicon.svg' | asset_url }}" type="image/svg+xml">
+    <link rel="preload" href="{{ 'oa-manrope-latin.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+    <title>{{ page_title | default: shop.name | escape }}</title>
+    <meta name="description" content="{{ page_description | default: 'Perfumería de Dubái. Descubre la selección mayorista de Oriental Aromas Wholesale.' | escape }}">
+    {{ content_for_header }}
+  </head>
+  <body>{{ content_for_layout }}</body>
+</html>

@@ -1,0 +1,7 @@
+.npm-cache/
+.vercel/
+_versions/
+dist/
+node_modules/
+shopify/
+*.log

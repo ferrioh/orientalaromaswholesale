@@ -1,0 +1,5 @@
+{
+  "layout": "oriental-aromas",
+  "sections": { "main": { "type": "oriental-aromas", "settings": {} } },
+  "order": ["main"]
+}

@@ -1,0 +1,94 @@
+/* Persistent navigation stays independent of the cinematic scroll transforms. */
+.oa .mobile-dock-shell { display: none; }
+html:has(#oriental-aromas-root) { scrollbar-gutter: stable; }
+
+@media (max-width: 1180px) {
+  .oa {
+    --dock-ink: #391e10;
+    --dock-paper: #f3eadd;
+    --dock-line: #b89b7466;
+    --dock-top: calc(87px + env(safe-area-inset-top, 0px));
+    --dock-panel-top: calc(var(--dock-top) + 114px);
+  }
+  html:has(#oriental-aromas-root) { scroll-padding-top: 210px; }
+  .oa .page-shell { padding-bottom: 0; }
+  .oa .announcement { height: 30px; padding: 0 4%; font-size: 9px; }
+  .oa .announcement > span:last-child { font-size: 9px; }
+  .oa .announcement button { font-size: 9px; min-height: 28px; }
+  .oa .header-main, .oa .site-header.is-scrolled .header-main {
+    height: 52px; margin: 5px 4% 0; padding: 0 7px 0 10px;
+    border-radius: 14px 14px 0 0; border-bottom: 0; box-shadow: none;
+  }
+  .oa .header-main .menu-toggle { display: none !important; }
+  .oa .header-main .account-link { display: inline-flex; }
+  .oa .logo-link, .oa .logo-link img { width: 102px; }
+  .oa .logo-link img { height: 44px; }
+  .oa .header-actions .icon-button { width: 44px; height: 44px; }
+  .oa .site-header { padding-top: env(safe-area-inset-top, 0px); }
+  .oa .mobile-dock-shell {
+    display: block; position: fixed; inset: 0; z-index: 65;
+    pointer-events: none; color: var(--dock-ink); text-shadow: none;
+  }
+  .oa .mobile-dock {
+    position: absolute; top: var(--dock-top);
+    left: max(4%, env(safe-area-inset-left, 0px));
+    right: max(4%, env(safe-area-inset-right, 0px));
+    margin: 0 auto; padding: 0 5px 3px;
+    border: 1px solid #b89b7499; border-top: 0; border-radius: 0 0 14px 14px; background: #e2ceb1ed;
+    box-shadow: 0 12px 24px #391e101a;
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); pointer-events: auto;
+  }
+  .oa .mobile-dock-primary { display: flex; justify-content: space-around; gap: 4px; }
+  .oa .mobile-dock-item {
+    position: relative; isolation: isolate; display: flex;
+    flex: 0 1 auto; flex-direction: column; max-width: calc(25% - 3px);
+    align-items: center; justify-content: center; gap: 2px; min-width: 0; min-height: 44px;
+    padding: 4px 5px; border-radius: 9px; font-size: 11px; font-weight: 600;
+    line-height: 1.3; text-align: center; color: var(--dock-ink);
+    transition: background .15s, color .15s;
+  }
+  .oa .mobile-dock-item > svg { display: block; width: 16px; height: 16px; stroke-width: 1.5; }
+  .oa .mobile-dock-primary .mobile-dock-item { min-height: 54px; }
+  .oa .mobile-dock-item .dock-chevron { position: absolute; top: 10px; left: calc(50% + 12px); width: 8px; height: 8px; transform: rotate(90deg); }
+  .oa .mobile-dock-item > span:not(.mobile-dock-selection) { position: relative; }
+  .oa .mobile-dock-item.is-selected { color: #fff5e5; }
+  .oa .mobile-dock-selection { position: absolute; inset: 0; z-index: -1; background: var(--dock-ink); border-radius: 9px; }
+  .oa .mobile-dock-item:active { background: #b89b7433; }
+  .oa .mobile-dock-secondary { display: flex; justify-content: space-around; gap: 6px; border-top: 1px solid var(--dock-line); margin: 3px 6px 0; }
+  .oa .mobile-dock-secondary > a:active { background: #b89b7433; border-radius: 8px; }
+  .oa .mobile-dock a:focus-visible, .oa .mobile-dock button:focus-visible,
+  .oa .mobile-dock-panel a:focus-visible, .oa .mobile-dock-panel button:focus-visible { outline: 2px solid var(--dock-ink); outline-offset: -3px; }
+  .oa .mobile-dock-scrim { position: absolute; inset: 0; background: #21150e66; pointer-events: auto; touch-action: none; }
+  .oa .mobile-dock-panel {
+    position: absolute; top: var(--dock-panel-top);
+    left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px));
+    max-width: 560px; max-height: calc(100dvh - var(--dock-panel-top) - max(12px, env(safe-area-inset-bottom, 0px)));
+    margin: 0 auto; display: flex; flex-direction: column; overflow: hidden;
+    border: 1px solid #fff4e2; border-radius: 24px; background: var(--dock-paper);
+    box-shadow: 0 12px 45px #21150e33; pointer-events: auto;
+  }
+  .oa .mobile-dock-panel-heading { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 15px 13px 20px; border-bottom: 1px solid var(--dock-line); }
+  .oa .mobile-dock-panel-heading p { font-size: 9px; font-weight: 600; letter-spacing: .09em; line-height: 1.5; margin-bottom: 5px; }
+  .oa .mobile-dock-panel-heading h2 { font-size: 24px; font-family: Lora, Georgia, serif; font-weight: 600; line-height: 1.2; text-transform: none; }
+  .oa .mobile-dock-panel-heading .icon-button { border: 1px solid var(--dock-line); border-radius: 50%; width: 44px; height: 44px; }
+  .oa .mobile-dock-panel-links {
+    flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px;
+    padding: 4px 20px 12px; overflow-y: auto; overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; scroll-padding: 8px; scrollbar-color: #947857 transparent; scrollbar-width: thin;
+  }
+  .oa .mobile-dock-panel-links > a { min-width: 0; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 9px; border-bottom: 1px solid var(--dock-line); font-size: 12px; line-height: 1.5; padding: 10px 0; overflow-wrap: anywhere; }
+  .oa .mobile-dock-panel-links > a > svg { width: 14px; height: 14px; opacity: .7; }
+  .oa .mobile-dock-panel-all { flex: 0 0 auto; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 20px; border-top: 1px solid var(--dock-line); font-size: 12px; font-weight: 600; }
+  .oa .mobile-dock-panel-all > svg { width: 17px; height: 17px; }
+  .oa .story-hero-bottom { bottom: 18px; }
+  .oa .story-welcome { bottom: 105px; }
+}
+
+@media (max-width: 1180px) and (max-height: 500px) {
+  .oa .mobile-dock-panel-heading { padding: 9px 13px 9px 18px; }
+  .oa .mobile-dock-panel-heading p { display: none; }
+  .oa .mobile-dock-panel-heading h2 { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oa .mobile-dock-item { transition: none; }
+}
