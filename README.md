@@ -38,6 +38,12 @@ La demo usa datos de vista previa (`src/products.json`) y enlaces a la tienda re
 
 ## Shopify (Liquid)
 
+### Tema completo (rama `shopify-theme`)
+
+La rama **`shopify-theme`** contiene un tema completo listo para Shopify: Dawn 16 + la landing, con producto, colección, carrito, búsqueda, páginas y 404. En Shopify: **Online Store → Themes → Add theme → Connect from GitHub**, elige el repo `ferrioh/orientalaromaswholesale` y la rama `shopify-theme`. El vídeo generado va incluido en los assets del tema.
+
+### Sección para un tema existente
+
 La carpeta `shopify/` no es un tema completo: es una **sección + plantilla de página** para integrarla en un tema existente y conservar producto, carrito y checkout. Incluye assets, layout independiente, sección y plantilla.
 
 ```powershell

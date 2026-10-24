@@ -49,6 +49,33 @@
     "sale.webp": {{ 'oa-sale.webp' | asset_url | json }},
     "truck-scroll.mp4": {{ intro_url | json }}
   },
+  "menus": {
+    "brands": [
+      {% for link in linklists[section.settings.brands_menu].links %}
+        { "title": {{ link.title | json }}, "url": {{ link.url | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "categories": [
+      {% for link in linklists[section.settings.categories_menu].links %}
+        { "title": {{ link.title | json }}, "url": {{ link.url | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "extras": [
+      {% for link in linklists[section.settings.extras_menu].links %}
+        { "title": {{ link.title | json }}, "url": {{ link.url | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "footerInfo": [
+      {% for link in linklists[section.settings.footer_info_menu].links %}
+        { "title": {{ link.title | json }}, "url": {{ link.url | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "footerHelp": [
+      {% for link in linklists[section.settings.footer_help_menu].links %}
+        { "title": {{ link.title | json }}, "url": {{ link.url | json }} }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  },
   "products": [
     {% for product in featured.products limit: 4 %}
       {
@@ -83,7 +110,14 @@
     { "type": "paragraph", "content": "Vídeo principal: loop de 40 s que empieza y termina en el logo. El camión avanza con el scroll. Ambos desaparecen antes de «Un gran comienzo»." },
     { "type": "collection", "id": "featured_collection", "label": "Colección de la selección" },
     { "type": "video", "id": "discovery_video", "label": "Vídeo principal: loop del logo", "info": "Opcional. Si se deja vacío se usa el vídeo incluido (40 s, inicia y termina en el logo)." },
-    { "type": "video", "id": "intro_video", "label": "Vídeo del camión (scroll)", "info": "Opcional. Si se deja vacío se usa el vídeo incluido del camión." }
+    { "type": "video", "id": "intro_video", "label": "Vídeo del camión (scroll)", "info": "Opcional. Si se deja vacío se usa el vídeo incluido del camión." },
+    { "type": "header", "content": "Menús de navegación (opcional)" },
+    { "type": "paragraph", "content": "Crea los menús en Shopify Admin → Online Store → Navigation y selecciónalos aquí. Si se dejan vacíos, la landing usa los enlaces incluidos." },
+    { "type": "link_list", "id": "brands_menu", "label": "Menú de marcas" },
+    { "type": "link_list", "id": "categories_menu", "label": "Menú de categorías" },
+    { "type": "link_list", "id": "extras_menu", "label": "Menú de complementos" },
+    { "type": "link_list", "id": "footer_info_menu", "label": "Footer: menú Explorar" },
+    { "type": "link_list", "id": "footer_help_menu", "label": "Footer: menú Ayuda" }
   ],
   "presets": [{ "name": "Oriental Aromas" }],
   "enabled_on": { "templates": ["index", "page"] }

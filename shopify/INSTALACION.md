@@ -2,6 +2,8 @@
 
 La carpeta `shopify/` se genera con `npm run build:shopify`. **No es un tema completo**: es una **sección + plantilla de página** para integrarla en un tema existente. Así conservas las páginas de producto, colecciones, cuenta, carrito y checkout de la tienda; esta entrega sustituye solo la portada.
 
+> Para importar un **tema completo** (Dawn 16 + landing) usa la rama **`shopify-theme`** del repositorio. La sección `shopify/` sigue disponible para integrarla en un tema existente.
+
 ## Qué incluye
 
 | Archivo generado | Destino en el tema | Función |
@@ -34,6 +36,22 @@ El paquete incluye `shopify/templates/index.json` con el mismo contenido que `pa
 
 No uses el layout independiente. Añade la sección **Oriental Aromas** desde el editor a una plantilla normal (`index.json` o una página) y elimina la línea `"layout": "oriental-aromas"` del JSON. Ten en cuenta que la app React también trae su propio header y footer; si los dos aparecen, quita los de la app o usa el layout independiente.
 
+### Menús de navegación desde Shopify
+
+La sección tiene ajustes opcionales de menús. Para gestionar los enlaces desde Shopify:
+
+1. Ve a **Online Store → Navigation** y crea los menús que necesites:
+   - Marcas
+   - Categorías
+   - Complementos
+   - Footer: Explorar
+   - Footer: Ayuda
+2. En el editor del tema, abre la sección **Oriental Aromas**.
+3. Selecciona cada menú en los ajustes correspondientes.
+4. Guarda y revisa la landing.
+
+Si dejas un menú vacío, la landing usa los enlaces incluidos. Los productos siguen saliendo de la colección elegida en la sección.
+
 ## Opción B: Shopify CLI (recomendada para desarrolladores)
 
 Requisitos: Shopify CLI instalado y acceso a la tienda.
@@ -51,9 +69,16 @@ shopify theme push --store TU-TIENDA.myshopify.com --theme ID_DEL_TEMA --path te
 
 Luego asigna la plantilla **oriental-aromas** a una página de prueba o copia el JSON a `templates/index.json` para usarla como inicio. `--unpublished` crea una copia de trabajo para revisar antes de publicar.
 
-## Opción C: tema completo para una demo
+## Opción C: tema completo (rama `shopify-theme`)
 
-No se incluye un tema completo a propósito. Subir un ZIP con **Add theme → Upload zip** reemplaza todo el tema y dejaría sin diseño las páginas de producto, colección, carrito y checkout. Para una demo visual usa **Vercel** (ver README). Si necesitas un tema Shopify independiente solo para la landing, se puede preparar, pero las páginas internas tendrían que construirse aparte.
+El repositorio incluye la rama **`shopify-theme`** con un tema completo: Dawn 16 + la landing de Oriental Aromas. Incluye producto, colección, carrito, búsqueda, páginas, blog y 404; la portada usa la landing y el resto conserva las plantillas de Dawn con la paleta beige/marrón.
+
+1. En Shopify: **Online Store → Themes → Add theme → Connect from GitHub**.
+2. Elige el repositorio `ferrioh/orientalaromaswholesale`.
+3. Elige la rama **`shopify-theme`**.
+4. Importa y revisa en vista previa antes de publicar.
+
+La rama incluye el vídeo generado en `assets/oa-discovery-pingpong.mp4`, por lo que Shopify lo lee directamente del tema, sin depender de un archivo externo.
 
 ## Vídeos y límites
 
@@ -65,6 +90,7 @@ No se incluye un tema completo a propósito. Subir un ZIP con **Add theme → Up
 ## Datos dinámicos y enlaces
 
 - Los cuatro productos salen de la colección elegida: título, URL, imagen y precio reales de Shopify.
+- Los enlaces de marcas, categorías, complementos y footer se pueden seleccionar desde menús de Shopify; si no, se usan los enlaces incluidos.
 - Los enlaces a colecciones, cuenta, carrito, políticas y páginas son relativos a la tienda.
 - El selector ES/EN cambia los textos de la landing; no cambia Shopify Markets, divisas ni las traducciones del resto de la tienda.
 - El límite de USD 499 es contenido informativo; las reglas de pedido mínimo y el checkout dependen de la configuración de Shopify.
