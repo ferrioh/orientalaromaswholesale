@@ -28,7 +28,8 @@ También puedes comprimir el contenido de esta carpeta en un ZIP y usar **Add th
 1. Abre el editor del tema en la página de inicio.
 2. En la sección **Oriental Aromas**, elige la colección de productos.
 3. Opcionalmente, selecciona vídeos propios en los ajustes de la sección.
-4. Revisa el menú, el footer, el selector ES/EN y los enlaces a colecciones.
+4. Para gestionar marcas, categorías, complementos y footer desde Shopify, crea menús en **Online Store → Navigation** y selecciónalos en los ajustes de la sección.
+5. Revisa el menú, el footer, el selector ES/EN y los enlaces a colecciones.
 
 ## Archivos clave
 
