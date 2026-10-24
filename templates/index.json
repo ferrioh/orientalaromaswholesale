@@ -1,0 +1,5 @@
+{
+  "layout": "landing",
+  "sections": { "main": { "type": "oriental-aromas", "settings": {} } },
+  "order": ["main"]
+}
